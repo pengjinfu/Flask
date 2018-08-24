@@ -2,11 +2,15 @@
 # -*- coding:utf-8 -*-
 # Author:Dreamer
 # Time:2018.8.16
+# 出现MySQLdb导入错误的时候调用下面导入方式
 import pymysql
+
 # 使用install_as_MySQLdb函数将pymysql MySQLdb一起使用
+pymysql.install_as_MySQLdb()
+
 from redis import StrictRedis
 
-pymysql.install_as_MySQLdb()
+
 # 定义配置类，并从中加载配置
 class Config(object):
     """工程配置信息"""
