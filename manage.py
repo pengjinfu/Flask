@@ -5,7 +5,12 @@
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from info import app, db
+from info import create_app, db
+
+
+# 单一职责的原则：manage.py 仅仅作为项目启动文件即可
+# 工厂方法的调用（ofo公司）
+app = create_app("development")
 
 manager = Manager(app)
 Migrate(app, db)

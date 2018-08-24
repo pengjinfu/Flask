@@ -47,15 +47,20 @@ class Config(object):
 
 
 class DevelopmentConfig(Config):
-    """开发模式"""
+    """开发阶段的项目配置"""
+    # 开启debug模式
     DEBUG = True
 
+
 class ProductionConfig(Config):
-    """生产者模式下配置"""
+    """生产阶段的项目配置"""
+    # 开启debug模式
     DEBUG = False
 
-#  定义配置字典
-config = {
-    "development":DevelopmentConfig,
-    "production":ProductionConfig
+
+# 使用方式： config_dict["development"]
+# 暴露一个借口给外界调用
+config_dict = {
+    "development": DevelopmentConfig,
+    "production": ProductionConfig
 }
