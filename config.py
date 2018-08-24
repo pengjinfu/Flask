@@ -4,11 +4,10 @@
 # Time:2018.8.16
 # 出现MySQLdb导入错误的时候调用下面导入方式
 import pymysql
-
 # 使用install_as_MySQLdb函数将pymysql MySQLdb一起使用
 pymysql.install_as_MySQLdb()
-
 from redis import StrictRedis
+import logging
 
 
 # 定义配置类，并从中加载配置
@@ -45,17 +44,26 @@ class Config(object):
     # 默认存储的有效时长 （没有调整之前默认值是timedelta(days=31)）
     PERMANENT_SESSION_LIFETIME = 86400 * 2
 
+    # 默认日志等级
+    LOG_LEVEL = logging.DEBUG
 
 class DevelopmentConfig(Config):
     """开发阶段的项目配置"""
     # 开启debug模式
     DEBUG = True
+    # 设置日志级别
+    LOG_LEVEL = logging.DEBUG
 
 
 class ProductionConfig(Config):
     """生产阶段的项目配置"""
     # 开启debug模式
     DEBUG = False
+    # 设置日志级别
+    LOG_LEVEL = logging.WARNING
+    # 修改数据库的链接对象
+    # 数据库链接配置
+    # SQLALCHEMY_DATABASE_URI = "mysql://root:cq@服务器ip地址:3306/information16"
 
 
 # 使用方式： config_dict["development"]
