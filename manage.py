@@ -8,6 +8,8 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 import redis
 from flask_wtf.csrf import CSRFProtect
+from flask_script import Manager
+from flask_migrate import Migrate,MigrateCommand
 # 出现MySQLdb导入错误的时候调用下面导入方式
 import pymysql
 # 使用install_as_MySQLdb函数将pymysql MySQLdb一起使用
@@ -63,6 +65,10 @@ redis_store = redis.StrictRedis(host=Config.REDIS_HOST, port=Config.REDIS_PORT)
 CSRFProtect(app)
 # 6.创建session拓展类的对象（将session的存储调整到redis中)
 Session(app)
+
+manager = Manager(app)
+Migrate(app,db)
+manager.add_command("db",MigrateCommand)
 
 if __name__ == '__main__':
     app.run()
